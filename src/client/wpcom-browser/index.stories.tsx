@@ -49,9 +49,7 @@ const ItemList: React.FC<MediaItemListProps> = ({ items }) => {
 export const List = () => {
   const [result] = usePromise(() => client.list(siteId), [client, siteId]);
   return (
-    <div>
-      {result && result.media && <ItemList items={result.media} />}
-    </div>
+    <div>{result && result.media && <ItemList items={result.media} />}</div>
   );
 };
 

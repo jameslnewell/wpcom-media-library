@@ -29,13 +29,13 @@
     "react": ">=16"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "storybook": "start-storybook -h calypso.localhost -p 3000",
-    "build-storybook": "build-storybook"
+    "start": "start-storybook -h calypso.localhost -p 3000",
+    "lint": "tsdx lint",
+    "test": "tsdx test --passWithNoTests",
+    "build": "yarn run build:bundle && yarn run build:storybook",
+    "build:bundle": "tsdx build",
+    "build:storybook": "build-storybook"
   },
   "husky": {
     "hooks": {
