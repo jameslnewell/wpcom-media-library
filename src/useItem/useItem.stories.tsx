@@ -26,7 +26,7 @@ const Example = () => {
       return (
         <div>
           {item && <h1>{item.title}</h1>}
-          {item && <img src={item.link} alt="" />}
+          {item && <img src={item.url} alt="" />}
         </div>
       );
     case ItemStatus.ERRORED:

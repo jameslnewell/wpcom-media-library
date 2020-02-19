@@ -15,7 +15,7 @@ import {
   loadingClient,
   loadedClient,
   erroredClient,
-  image,
+  imageData,
   notFoundError
 } from "../__fixtures__";
 
@@ -35,7 +35,7 @@ describe("useItem()", () => {
       }
     );
     await waitForNextUpdate();
-    expect(result.current).toEqual([ItemStatus.LOADED, image, undefined]);
+    expect(result.current).toEqual([ItemStatus.LOADED, imageData, undefined]);
   });
 
   test("returns errored result when errored", async () => {
@@ -62,7 +62,7 @@ describe("useItem()", () => {
       }
     );
     await waitForNextUpdate();
-    expect(result.current).toEqual([ItemStatus.LOADED, image, undefined]);
+    expect(result.current).toEqual([ItemStatus.LOADED, imageData, undefined]);
     expect(getSpy).toBeCalledTimes(1);
   });
 });

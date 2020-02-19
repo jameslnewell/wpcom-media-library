@@ -8,6 +8,7 @@ export const ERRORED_ACTION = "errored";
 
 export const LOADING_ACTION = "loading";
 export const LOADED_ACTION = "loaded";
+export const UPDATED_ACTION = "updated";
 
 export const REFERENCE_ACTION = "reference";
 export const DEREFERENCE_ACTION = "dereference";
@@ -27,6 +28,11 @@ export interface LoadedAction {
   payload: { siteId: string; itemId: string; data: ItemData };
 }
 
+export interface UpdatedAction {
+  type: typeof UPDATED_ACTION;
+  payload: { siteId: string; itemId: string; data: ItemData };
+}
+
 export interface RefrenceAction {
   type: typeof REFERENCE_ACTION;
   payload: { siteId: string; itemId: string };
@@ -41,6 +47,7 @@ export type Action =
   | ErroredAction
   | LoadingAction
   | LoadedAction
+  | UpdatedAction
   | RefrenceAction
   | DerefrenceAction;
 
@@ -58,6 +65,21 @@ export const createActions = (
       dispatch({
         type: LOADED_ACTION,
         payload: { siteId, itemId, data }
+      });
+    } catch (error) {
+      dispatch({
+        type: ERRORED_ACTION,
+        payload: { siteId, itemId, error }
+      });
+    }
+  },
+
+  update: async (siteId: string, itemId: string, data: Partial<ItemData>) => {
+    try {
+      const newData = await client.update(siteId, itemId, data);
+      dispatch({
+        type: UPDATED_ACTION,
+        payload: { siteId, itemId, data: newData }
       });
     } catch (error) {
       dispatch({

@@ -1,14 +1,13 @@
-export interface ClientMediaItem {
-  id: string;
-  link: string;
-  title: string;
-}
+/**
+ * Internal dependencies
+ */
+import { ItemData } from "../types";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ClientItemResponse extends ClientMediaItem {}
+export interface ClientItemResponse extends ItemData {}
 
 export interface ClientItemListResponse {
-  media: ClientMediaItem[];
+  media: ItemData[];
   errors: string[];
 }
 
@@ -20,7 +19,7 @@ export interface Client {
   update(
     siteId: string,
     mediaId: string,
-    data: Partial<ClientMediaItem>
+    data: Partial<ItemData>
   ): Promise<ClientItemResponse>;
   delete(siteId: string, mediaId: string): Promise<ClientItemResponse>;
 }

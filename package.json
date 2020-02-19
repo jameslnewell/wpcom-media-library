@@ -4,6 +4,15 @@
   "module": "dist/wpcom-media-library.esm.js",
   "typings": "dist/index.d.ts",
   "dependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/wordpress__components": "^8.5.2",
+    "@types/wordpress__i18n": "^3.4.0",
+    "@wordpress/components": "^9.2.0",
+    "@wordpress/i18n": "^3.9.0",
+    "date-fns": "^2.9.0",
+    "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15",
+    "react-render-image": "^2.0.0-preview.1",
     "wpcom-proxy-request": "^5.0.2"
   },
   "devDependencies": {
@@ -35,7 +44,7 @@
   "scripts": {
     "prepare": "tsdx build",
     "start": "start-storybook -h calypso.localhost -p 3000",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint --fix",
     "test": "tsdx test --passWithNoTests",
     "build": "yarn run build:bundle && yarn run build:storybook",
     "build:bundle": "tsdx build",
