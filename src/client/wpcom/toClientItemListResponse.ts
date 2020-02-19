@@ -11,12 +11,12 @@ export function toClientItemListResponse(res: any): ClientItemListResponse {
   console.log("toClientItemListResponse()", res);
   return {
     media: res.media.map((media: any) => ({
-      id: media.ID,
+      id: media.id,
 
-      url: media.URL,
-      name: res.file,
-      mime: res.mime_type,
-      extension: res.extension,
+      url: media.link || undefined,
+      name: media.file,
+      mime: media.mime_type,
+      extension: media.extension,
 
       title: media.title,
       caption: media.caption,

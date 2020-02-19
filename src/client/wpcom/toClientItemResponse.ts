@@ -13,10 +13,10 @@ export function toClientItemResponse(res: any): ClientItemResponse {
   return {
     id: res.id,
 
+    url: res.link || undefined,
     name: res.file,
     mime: res.mime_type,
     extension: res.extension,
-    url: res.link || undefined,
 
     title: res.title,
     caption: res.caption,
