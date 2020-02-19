@@ -1,15 +1,22 @@
 /**
  * Internal dependencies
  */
+import { ItemData } from "../types";
 import { MockClient } from "../client";
 
 export const siteId = "160146488";
 
 export const imageId = "image-123";
-export const image = {
-  id: "123",
-  link:
-    "https://test790749266.files.wordpress.com/2020/02/e68ecb675ad7c0561595ed4265420a1a.jpg?resize=214%2C214",
+export const imageData: ItemData = {
+  id: imageId,
+  url:
+    "https://test790749266.files.wordpress.com/2020/02/e68ecb675ad7c0561595ed4265420a1a.jpg",
+  name: "e68ecb675ad7c0561595ed4265420a1a.jpg",
+  extension: "jpg",
+  mime: "image/jpeg",
+  createdAt: "2020-02-02T23:43:20+00:00",
+  width: 1016,
+  height: 675,
   title: "Its fine!"
 };
 
@@ -23,7 +30,7 @@ export const loadingClient = new MockClient({
 });
 
 export const loadedClient = new MockClient({
-  get: () => Promise.resolve(image)
+  get: () => Promise.resolve(imageData)
 });
 
 export const erroredClient = new MockClient({

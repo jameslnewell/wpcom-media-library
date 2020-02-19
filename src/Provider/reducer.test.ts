@@ -1,5 +1,5 @@
 import { SiteItemMap, ItemStatus } from "../types";
-import { siteId, imageId, image, notFoundError } from "../__fixtures__";
+import { siteId, imageId, imageData, notFoundError } from "../__fixtures__";
 import { reducer } from "./reducer";
 import {
   ERRORED_ACTION,
@@ -21,7 +21,7 @@ const loadingState: SiteItemMap = {
     [imageId]: {
       refs: 0,
       status: ItemStatus.LOADING,
-      data: image,
+      data: imageData,
       error: undefined
     }
   }
@@ -49,7 +49,7 @@ const loadedAction: LoadedAction = {
   payload: {
     siteId,
     itemId: imageId,
-    data: image
+    data: imageData
   }
 };
 
@@ -107,7 +107,7 @@ describe("Provider", () => {
         {
           refs: 0,
           status: ItemStatus.LOADED,
-          data: image,
+          data: imageData,
           error: undefined
         }
       );

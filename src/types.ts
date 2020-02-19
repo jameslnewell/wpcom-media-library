@@ -1,16 +1,26 @@
 export enum ItemStatus {
   LOADING,
   LOADED,
-  UPDATING,
-  DELETING,
   DELETED,
   ERRORED
 }
 
 export interface ItemData {
   id: string;
-  link: string;
+
+  url?: string;
+  name?: string;
+  mime?: string;
+  extension?: string;
+  width?: number;
+  height?: number;
+
+  createdAt?: string;
+
   title: string;
+  alt?: string;
+  caption?: string;
+  description?: string;
 }
 
 export type ItemError = any;

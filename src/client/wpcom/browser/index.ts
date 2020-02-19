@@ -1,37 +1,42 @@
 /**
  * Internal dependencies
  */
+import { ItemData } from "../../../types";
 import {
   Client,
-  ClientMediaItem,
   ClientItemResponse,
   ClientItemListResponse
-} from "../Client";
+} from "../../Client";
+import { toClientItemResponse } from "../toClientItemResponse";
+import { toClientItemListResponse } from "../toClientItemListResponse";
 import { fetch } from "./fetch";
 
 export class WPCOMBrowserClient implements Client {
   public async list(siteId: string): Promise<ClientItemListResponse> {
     // TODO: support criteria e.g. mime_type
     const res = await fetch("GET", `/sites/${siteId}/media`);
-    return res;
+    // TODO: transform response to be a consistent data structure (same as .get())
+    return toClientItemListResponse(res);
   }
 
   public async createFromFile(
     siteId: string,
     file: File
   ): Promise<ClientItemListResponse> {
-    return await fetch("POST", `/sites/${siteId}/media/new`, [
+    const res = await fetch("POST", `/sites/${siteId}/media/new`, [
       ["media[]", file]
     ]);
+    return toClientItemListResponse(res);
   }
 
   public async createFromURL(
     siteId: string,
     url: string
   ): Promise<ClientItemListResponse> {
-    return await fetch("POST", `/sites/${siteId}/media/new`, [
+    const res = await fetch("POST", `/sites/${siteId}/media/new`, [
       ["media_urls[]", url]
     ]);
+    return toClientItemListResponse(res);
   }
 
   public async get(
@@ -39,20 +44,20 @@ export class WPCOMBrowserClient implements Client {
     mediaId: string
   ): Promise<ClientItemResponse> {
     const res = await fetch("GET", `/sites/${siteId}/media/${mediaId}`);
-    return res;
+    return toClientItemResponse(res);
   }
 
   public async update(
     siteId: string,
     mediaId: string,
-    data: Partial<ClientMediaItem>
+    data: Partial<ItemData>
   ): Promise<ClientItemResponse> {
-    const keys: Array<keyof ClientMediaItem> = Object.keys(data) as any;
+    const keys: Array<keyof ItemData> = Object.keys(data) as any;
     const res = await fetch("POST", `/sites/${siteId}/media/${mediaId}`, [
       ["ID", mediaId],
       ...keys.map(key => [key, data[key]])
     ]);
-    return res;
+    return toClientItemResponse(res);
   }
 
   public async delete(
@@ -60,6 +65,6 @@ export class WPCOMBrowserClient implements Client {
     mediaId: string
   ): Promise<ClientItemResponse> {
     const res = await fetch("POST", `/sites/${siteId}/media/${mediaId}/delete`);
-    return res;
+    return toClientItemResponse(res);
   }
 }

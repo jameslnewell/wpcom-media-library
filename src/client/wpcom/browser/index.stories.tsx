@@ -7,8 +7,8 @@ import { usePromise, useInvokablePromise } from "@jameslnewell/react-promise";
 /**
  * Internal dependencies
  */
-import { WPCOMBrowserClient } from "..";
-import { siteId } from "../../__fixtures__";
+import { WPCOMBrowserClient } from "../..";
+import { siteId } from "../../../__fixtures__";
 
 const client = new WPCOMBrowserClient();
 
@@ -16,27 +16,27 @@ export default {
   title: "Client/WPCOMBrowserClient"
 };
 
-interface MediaItemProps {
+interface ItemProps {
   id: string;
-  link: string;
+  url?: string;
   title: string;
 }
 
-const Item: React.FC<MediaItemProps> = ({ id, link, title }) => {
+const Item: React.FC<ItemProps> = ({ id, url, title }) => {
   return (
     <span>
       #{id} - {title}
       <br />
-      <img src={link} alt="" />
+      <img src={url} alt="" />
     </span>
   );
 };
 
-interface MediaItemListProps {
-  items: MediaItemProps[];
+interface ItemListProps {
+  items: ItemProps[];
 }
 
-const ItemList: React.FC<MediaItemListProps> = ({ items }) => {
+const ItemList: React.FC<ItemListProps> = ({ items }) => {
   return (
     <div>
       {items.map(item => (

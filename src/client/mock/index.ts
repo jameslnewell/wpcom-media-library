@@ -1,12 +1,8 @@
 /**
  * Internal dependencies
  */
-import {
-  Client,
-  ClientMediaItem,
-  ClientItemResponse,
-  ClientItemListResponse
-} from "../Client";
+import { ItemData } from "../../types";
+import { Client, ClientItemResponse, ClientItemListResponse } from "../Client";
 
 export class MockClient implements Client {
   public constructor(private mocks: Partial<Client>) {}
@@ -48,7 +44,7 @@ export class MockClient implements Client {
   public update(
     siteId: string,
     mediaId: string,
-    data: Partial<ClientMediaItem>
+    data: Partial<ItemData>
   ): Promise<ClientItemResponse> {
     if (this.mocks.update) {
       return this.mocks.update(siteId, mediaId, data);
